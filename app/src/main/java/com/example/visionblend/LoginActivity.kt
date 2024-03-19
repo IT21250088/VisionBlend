@@ -3,6 +3,7 @@ package com.example.visionblend
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -55,6 +56,21 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Successfully LoggedIn", Toast.LENGTH_SHORT).show()
             } else
                 Toast.makeText(this, "Log In failed ", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun resetPassword(view: View) {
+        val email = etEmail.text.toString()
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show()
+        } else {
+            auth.sendPasswordResetEmail(email).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(this, "Email sent", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Error sending email", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
