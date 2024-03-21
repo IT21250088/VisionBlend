@@ -9,6 +9,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.util.Locale
 
 class SignUpActivity : AppCompatActivity() {
@@ -17,9 +19,18 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var etPass: EditText
     private lateinit var btnSignUp: Button
     private lateinit var tvRedirectLogin: TextView
+    private lateinit var etName: EditText
+
 
     // Create Firebase authentication object
     private lateinit var auth: FirebaseAuth
+
+    //private lateinit var database: DatabaseReference
+    private lateinit var database: DatabaseReference
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +42,14 @@ class SignUpActivity : AppCompatActivity() {
         etPass = findViewById(R.id.etSPassword)
         btnSignUp = findViewById(R.id.btnSSigned)
         tvRedirectLogin = findViewById(R.id.tvRedirectLogin)
+        etName = findViewById(R.id.etSUsername)
+
 
         // Initialize auth object
         auth = FirebaseAuth.getInstance()
+
+        // Initialize database object
+        database = FirebaseDatabase.getInstance().reference
 
         btnSignUp.setOnClickListener {
             signUpUser()
@@ -59,14 +75,15 @@ class SignUpActivity : AppCompatActivity() {
 
 
     private fun signUpUser() {
+        val name = etName.text.toString()
         val email = etEmail.text.toString()
         val pass = etPass.text.toString()
         val confirmPassword = etConfPass.text.toString()
 
-        // Check if email or password fields are blank
-        if (email.isBlank() || pass.isBlank() || confirmPassword.isBlank()) {
-            Toast.makeText(this, "Email and Password can't be blank", Toast.LENGTH_SHORT).show()
-            speakOut("Email and Password can't be blank")
+        // Check if email,name, password fields are blank
+        if (name.isBlank() || email.isBlank() || pass.isBlank() || confirmPassword.isBlank()) {
+            Toast.makeText(this, "Fields cannot be blank", Toast.LENGTH_SHORT).show()
+            speakOut("Fields cannot be blank")
             return
         }
 
@@ -80,9 +97,24 @@ class SignUpActivity : AppCompatActivity() {
         // If all credentials are correct, attempt to sign up
         auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                Toast.makeText(this, "Successfully Signed Up", Toast.LENGTH_SHORT).show()
-                speakOut("Successfully Signed Up")
-                finish()
+                // Save name and email to the database
+                val userId = auth.currentUser?.uid
+                userId?.let {
+                    val user = hashMapOf("name" to name, "email" to email)
+                    database.child("users").child(it).setValue(user).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Successfully Signed Up and user info saved", Toast.LENGTH_SHORT).show()
+                            speakOut("Successfully Signed Up and user info saved")
+                            finish()
+                        } else {
+                            Toast.makeText(this, "Failed to save user info", Toast.LENGTH_SHORT).show()
+                            speakOut("Failed to save user info")
+                        }
+                    }
+                } ?: run {
+                    Toast.makeText(this, "Sign Up Successful but failed to save user info", Toast.LENGTH_SHORT).show()
+                    speakOut("Sign Up Successful but failed to save user info")
+                }
             } else {
                 Toast.makeText(this, "Sign Up Failed!", Toast.LENGTH_SHORT).show()
                 speakOut("Sign Up Failed!")
