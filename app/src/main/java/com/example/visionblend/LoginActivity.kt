@@ -3,12 +3,14 @@ package com.example.visionblend
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import java.util.Locale
 
 class LoginActivity : AppCompatActivity() {
 
@@ -45,6 +47,18 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+//   voice out put
+    private lateinit var tts: TextToSpeech
+    override fun onStart() {
+        super.onStart()
+        tts = TextToSpeech(this) { status ->
+            if (status != TextToSpeech.ERROR) {
+                tts.language = Locale.US
+            }
+        }
+    }
+
+
     private fun login() {
         val email = etEmail.text.toString()
         val pass = etPass.text.toString()
@@ -54,8 +68,12 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this) {
             if (it.isSuccessful) {
                 Toast.makeText(this, "Successfully LoggedIn", Toast.LENGTH_SHORT).show()
-            } else
+                speakOut("Successfully LoggedIn")
+            } else {
                 Toast.makeText(this, "Log In failed ", Toast.LENGTH_SHORT).show()
+                speakOut("Log In failed")
+
+            }
         }
     }
 
@@ -63,15 +81,33 @@ class LoginActivity : AppCompatActivity() {
         val email = etEmail.text.toString()
         if (email.isEmpty()) {
             Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show()
+            speakOut("Please enter your email")
         } else {
             auth.sendPasswordResetEmail(email).addOnCompleteListener {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Email sent", Toast.LENGTH_SHORT).show()
+                    speakOut("Email sent. Please check your email for further instructions.")
                 } else {
                     Toast.makeText(this, "Error sending email", Toast.LENGTH_SHORT).show()
+                    speakOut("Error sending email")
+
                 }
             }
         }
     }
+
+    private fun speakOut(text: String) {
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
+    }
+    override fun onDestroy() {
+        // Shutdown Text-to-Speech engine
+        if (tts.isSpeaking) {
+            tts.stop()
+        }
+        tts.shutdown()
+        super.onDestroy()
+    }
+
+
 
 }

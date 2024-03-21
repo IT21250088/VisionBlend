@@ -2,12 +2,14 @@ package com.example.visionblend
 
 import android.content.Intent
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import java.util.Locale
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var etEmail: EditText
@@ -44,6 +46,18 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    //   voice out put
+    private lateinit var tts: TextToSpeech
+    override fun onStart() {
+        super.onStart()
+        tts = TextToSpeech(this) { status ->
+            if (status != TextToSpeech.ERROR) {
+                tts.language = Locale.US
+            }
+        }
+    }
+
+
     private fun signUpUser() {
         val email = etEmail.text.toString()
         val pass = etPass.text.toString()
@@ -52,12 +66,14 @@ class SignUpActivity : AppCompatActivity() {
         // Check if email or password fields are blank
         if (email.isBlank() || pass.isBlank() || confirmPassword.isBlank()) {
             Toast.makeText(this, "Email and Password can't be blank", Toast.LENGTH_SHORT).show()
+            speakOut("Email and Password can't be blank")
             return
         }
 
         // Check if password and confirm password match
         if (pass != confirmPassword) {
             Toast.makeText(this, "Password and Confirm Password do not match", Toast.LENGTH_SHORT).show()
+            speakOut("Password and Confirm Password do not match")
             return
         }
 
@@ -65,10 +81,24 @@ class SignUpActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 Toast.makeText(this, "Successfully Signed Up", Toast.LENGTH_SHORT).show()
+                speakOut("Successfully Signed Up")
                 finish()
             } else {
                 Toast.makeText(this, "Sign Up Failed!", Toast.LENGTH_SHORT).show()
+                speakOut("Sign Up Failed!")
             }
         }
+    }
+
+    private fun speakOut(text: String) {
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
+    }
+    override fun onDestroy() {
+        // Shutdown Text-to-Speech engine
+        if (tts.isSpeaking) {
+            tts.stop()
+        }
+        tts.shutdown()
+        super.onDestroy()
     }
 }

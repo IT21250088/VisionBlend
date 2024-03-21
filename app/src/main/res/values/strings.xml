@@ -8,4 +8,5 @@
     <string name="login">login</string>
     <string name="don_t_have_an_account_sign_in">don_t_have_an_account_sign_in</string>
     <string name="forgot_password">forgot_password</string>
+    <string name="name">name</string>
 </resources>

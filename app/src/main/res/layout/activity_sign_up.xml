@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="353dp"
+        android:layout_width="399dp"
+        android:layout_height="376dp"
         android:layout_marginBottom="304dp"
         android:orientation="vertical"
 
@@ -18,8 +18,22 @@
         android:paddingTop="40dp"
         android:paddingBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="4dp">
+
+        <EditText
+            android:id="@+id/etSUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="15dp"
+            android:autofillHints="username"
+            android:ems="10"
+            android:hint="@string/name"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:textColorHint="#757575" />
 
         <EditText
             android:id="@+id/etSEmailAddress"
@@ -51,6 +65,7 @@
 
         <EditText
             android:id="@+id/etSConfPassword"
+            style="@style/Widget.AppCompat.AutoCompleteTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -61,6 +76,8 @@
             android:hint="@string/confirm_password"
             android:inputType="textPassword"
             android:minHeight="48dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
             tools:ignore="TextContrastCheck" />
 
         <Button
