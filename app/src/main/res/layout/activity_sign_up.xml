@@ -11,7 +11,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="399dp"
         android:layout_height="376dp"
-        android:layout_marginBottom="304dp"
+        android:layout_marginBottom="196dp"
         android:orientation="vertical"
 
         android:padding="15dp"
@@ -19,7 +19,7 @@
         android:paddingBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="4dp">
+        tools:layout_editor_absoluteX="6dp">
 
         <EditText
             android:id="@+id/etSUsername"
@@ -86,8 +86,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:background="@color/purple_700"
+            android:minHeight="48dp"
             android:text="@string/signed"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/tvRedirectLogin"

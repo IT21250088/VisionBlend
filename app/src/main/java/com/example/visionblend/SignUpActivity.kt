@@ -55,9 +55,9 @@ class SignUpActivity : AppCompatActivity() {
             signUpUser()
         }
 
-        // Switch from SignUp Activity to Login Activity
+        // Switch from login Activity to sign Activity
         tvRedirectLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
     }
@@ -123,6 +123,8 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun speakOut(text: String) {
+        val speechRate = 1f
+        tts.setSpeechRate(speechRate)
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
     override fun onDestroy() {

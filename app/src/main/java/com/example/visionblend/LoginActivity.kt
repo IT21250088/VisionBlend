@@ -97,6 +97,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun speakOut(text: String) {
+        val speechRate = 1f
+        tts.setSpeechRate(speechRate)
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
     override fun onDestroy() {
