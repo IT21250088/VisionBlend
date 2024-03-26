@@ -2,4 +2,28 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+        <!-- Default theme colors -->
+        <color name="colorPrimary">#3F51B5</color>
+        <color name="colorPrimaryDark">#303F9F</color>
+        <color name="colorAccent">#FF4081</color>
+        <color name="defaultTextColor">#000000</color>
+
+        <!-- Monochromatism theme colors -->
+        <color name="colorPrimaryMono">#808080</color>
+        <color name="colorPrimaryDarkMono">#606060</color>
+        <color name="colorAccentMono">#A0A0A0</color>
+        <color name="monoTextColor">#000000</color>
+
+        <!-- Tritanopia theme colors -->
+        <color name="colorPrimaryTritan">#00796B</color>
+        <color name="colorPrimaryDarkTritan">#00574B</color>
+        <color name="colorAccentTritan">#4CAF50</color>
+        <color name="tritanTextColor">#000000</color>
+
+        <!-- Deuteranopia and Protanopia theme colors -->
+        <color name="colorPrimaryDeuteran">#1976D2</color>
+        <color name="colorPrimaryDarkDeuteran">#1565C0</color>
+        <color name="colorAccentDeuteran">#448AFF</color>
+        <color name="deuteranTextColor">#000000</color>
 </resources>
