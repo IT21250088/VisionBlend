@@ -5,10 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.visionblend.GroceryItem
-import com.example.visionblend.R
 
-class MainActivity : AppCompatActivity() {
+class Categories : AppCompatActivity() {
 
     private val groceryList = listOf(
         GroceryItem(R.drawable.beverages, "Beverages", "Fresh apples"),
