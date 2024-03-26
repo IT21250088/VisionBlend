@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">VisionBlend</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="confirm_password">confirm_password</string>
+    <string name="signed">signed</string>
+    <string name="already_have_an_account_login">already_have_an_account_login</string>
+    <string name="login">login</string>
+    <string name="don_t_have_an_account_sign_in">don_t_have_an_account_sign_in</string>
+    <string name="forgot_password">forgot_password</string>
+    <string name="name">name</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
 </resources>
