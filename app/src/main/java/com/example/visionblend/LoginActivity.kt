@@ -78,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun resetPassword(view: View) {
+        // getting email from the user
         val email = etEmail.text.toString()
         if (email.isEmpty()) {
             Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show()
