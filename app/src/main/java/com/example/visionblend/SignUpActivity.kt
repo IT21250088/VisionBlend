@@ -21,19 +21,14 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var tvRedirectLogin: TextView
     private lateinit var etName: EditText
 
-
     // Create Firebase authentication object
     private lateinit var auth: FirebaseAuth
 
     //private lateinit var database: DatabaseReference
     private lateinit var database: DatabaseReference
 
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
-// Retrieve the theme from the shared preferences
+    // Retrieve the theme from the shared preferences
         val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
         val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
         // Set the theme
@@ -49,7 +44,6 @@ class SignUpActivity : AppCompatActivity() {
         btnSignUp = findViewById(R.id.btnSSigned)
         tvRedirectLogin = findViewById(R.id.tvRedirectLogin)
         etName = findViewById(R.id.etSUsername)
-
 
         // Initialize auth object
         auth = FirebaseAuth.getInstance()
@@ -78,7 +72,6 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun signUpUser() {
         val name = etName.text.toString()

@@ -4,24 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:andriod="http://schemas.android.com/apk/res/android"
     tools:context=".LoginActivity">
 
     <LinearLayout
         android:layout_width="317dp"
         android:layout_height="201dp"
         android:orientation="vertical"
+        android:backgroundTint="?attr/buttonColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.441">
+        app:layout_constraintVertical_bias="0.441"
+        >
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="283dp"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:backgroundTint="#348C37"
+            android:backgroundTint="?attr/backgroundColor"
             android:text="Login" />
 
         <TextView
