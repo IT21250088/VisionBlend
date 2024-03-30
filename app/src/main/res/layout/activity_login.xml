@@ -4,15 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    xmlns:andriod="http://schemas.android.com/apk/res/android"
-    tools:context=".LoginActivity">
-
-    <LinearLayout
-        android:layout_width="317dp"
-        android:layout_height="201dp"
-        android:backgroundTint="?attr/buttonColor"
-
     android:backgroundTint="#FFFFFF"
     tools:context=".LoginActivity">
 
@@ -20,37 +11,11 @@
         android:id="@+id/linearLayout5"
         android:layout_width="315dp"
         android:layout_height="175dp"
-
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.34"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintVertical_bias="0.674">
-
-        <Button
-            android:id="@+id/btnLogin"
-            style="@style/ButtonStyle"
-            android:layout_width="283dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="@string/login" />
-
-        <TextView
-            android:id="@+id/forgotpassword"
-            android:layout_width="274dp"
-            android:layout_height="23dp"
-            android:layout_margin="15dp"
-            android:backgroundTint="#8F3939"
-            android:gravity="center_horizontal"
-            android:minHeight="48dp"
-            android:onClick="resetPassword"
-            android:text="@string/forgot_password"
-            android:textColor="#18206F"
-            android:textSize="16sp" />
-
         app:layout_constraintVertical_bias="0.733">
 
         <Button
@@ -61,7 +26,6 @@
             android:backgroundTint="#348C37"
             android:text="Login"
             android:textSize="24sp" />
-
 
         <TextView
             android:id="@+id/tvRedirectSignUp"
@@ -114,7 +78,6 @@
         app:layout_constraintTop_toBottomOf="@+id/etEmailAddress"
         tools:ignore="MissingConstraints" />
 
-
     <TextView
         android:id="@+id/forgotpassword"
         android:layout_width="178dp"
@@ -147,7 +110,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.358" />
-
 
     <!--    <Button-->
     <!--        android:id="@+id/btnLogin"-->

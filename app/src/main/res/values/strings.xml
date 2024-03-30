@@ -11,18 +11,8 @@
     <string name="name">name</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
-
-    <string name="fruits_and_vegetables">Fruits and Vegetables</string>
-    <string name="_3_deuteranopia_and_protanopia">3.Deuteranopia and Protanopia</string>
-    <string name="_1_monochromatism">1.Monochromatism</string>
-    <string name="_2_tritanopia">2.Tritanopia</string>
-    <string name="visionblend">VisionBlend</string>
-    <string name="visual_diabilities">Visual Diabilities</string>
-    <string name="categories">Categories</string>
-
     <string name="Forgot_Password">Forgot password</string>
     <string name="don_t_have_an_account">don\'t have an account sign in</string>
     <string name="forgotpassword">Forgot password</string>
     <string name="signup">Signup</string>
-
 </resources>
