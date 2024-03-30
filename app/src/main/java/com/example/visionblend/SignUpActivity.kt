@@ -73,6 +73,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+//    abc
 
     private fun signUpUser() {
         val name = etName.text.toString()
