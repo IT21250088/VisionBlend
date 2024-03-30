@@ -86,19 +86,34 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
 
         // Check the spoken text and navigate to the appropriate activity
-        if (text.contains("You selected one.")) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        val themeId = when {
+            text.contains("You selected one.") -> {
+                navigateToLoginPage(R.style.Theme_VisionBlend_Monochromatism)
+                R.style.Theme_VisionBlend_Monochromatism
+            }
+            text.contains("You selected two.") -> {
+                navigateToLoginPage(R.style.Theme_VisionBlend_Tritanopia)
+                R.style.Theme_VisionBlend_Tritanopia
+            }
+            text.contains("You selected three.") -> {
+                navigateToLoginPage(R.style.Theme_VisionBlend_Deuteranopia)
+                R.style.Theme_VisionBlend_Deuteranopia
+            }
+
+            else -> {}
         }
-        if (text.contains("You selected two.")) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
-        if (text.contains("You selected three.")) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+    }
+
+    private fun navigateToLoginPage(themeId: Int) {
+        // Store the selected theme in a shared preference
+        val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
+        with (sharedPref.edit()) {
+            putInt("themeId", themeId)
+            apply()
         }
 
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onInit(status: Int) {
