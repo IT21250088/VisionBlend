@@ -1,5 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <!-- Default theme colors -->
+    <color name="colorPrimary">#9C27B0</color>
+    <color name="colorPrimaryDark">#3C4CB1</color>
+    <color name="colorAccent">#29B6F6</color>
+    <color name="defaultTextColor">#000000</color>
+    <color name="buttonColorDefault">#3F51B5</color>
+    <color name="backgroundColorDefault">#FFFFFF</color>
+
+    <!-- Monochromatism theme colors -->
+    <color name="colorPrimaryMono">#808080</color>
+    <color name="colorPrimaryDarkMono">#606060</color>
+    <color name="colorAccentMono">#A0A0A0</color>
+    <color name="monoTextColor">#000000</color>
+    <color name="buttonColorMono">#808080</color>
+    <color name="backgroundColorMono">#EADBF8</color>
+
+    <!-- Tritanopia theme colors -->
+    <color name="colorPrimaryTritan">#6A6003</color>
+    <color name="colorPrimaryDarkTritan">#00574B</color>
+    <color name="colorAccentTritan">#4CAF50</color>
+    <color name="tritanTextColor">#000000</color>
+    <color name="buttonColorTritan">#00796B</color>
+    <color name="backgroundColorTritan">#F6EB84</color>
+
+    <!-- Deuteranopia and Protanopia theme colors -->
+    <color name="colorPrimaryDeuteran">#1976D2</color>
+    <color name="colorPrimaryDarkDeuteran">#1565C0</color>
+    <color name="colorAccentDeuteran">#448AFF</color>
+    <color name="deuteranTextColor">#000000</color>
+    <color name="buttonColorDeuteran">#1976D2</color>
+    <color name="backgroundColorDeuteran">#4FBFF1</color>
+
+
 </resources>
