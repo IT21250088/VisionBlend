@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
     tools:context=".Category">
-
 
     <ImageView
         android:id="@+id/imageView7"
@@ -23,10 +23,9 @@
         android:id="@+id/textView"
         android:layout_width="308dp"
         android:layout_height="37dp"
-
         android:layout_marginTop="28dp"
         android:background="#F1E9A8"
-        android:text="1.Monochromatism"
+        android:text="@string/_1_monochromatism"
         android:textColorLink="#834949"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -40,7 +39,7 @@
         android:layout_height="41dp"
         android:layout_marginStart="52dp"
         android:background="#F1E9A8"
-        android:text="3.Deuteranopia and Protanopia"
+        android:text="@string/_3_deuteranopia_and_protanopia"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +54,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
         android:background="#F1E9A8"
-        android:text="2.Tritanopia"
+        android:text="@string/_2_tritanopia"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +68,7 @@
         android:layout_height="41dp"
         android:layout_marginTop="48dp"
         android:fontFamily="sans-serif-black"
-        android:text="VisionBlend"
+        android:text="@string/visionblend"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.119"
@@ -82,7 +81,7 @@
         android:layout_height="36dp"
         android:layout_marginTop="294dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Visual Diabilities"
+        android:text="@string/visual_diabilities"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,9 +106,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.845"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/voice" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

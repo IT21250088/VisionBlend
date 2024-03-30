@@ -26,6 +26,8 @@
         <item name="android:buttonStyle">@style/ButtonStyleMono</item>
         <item name="buttonColor">@color/buttonColorMono</item>
         <item name="backgroundColor">@color/backgroundColorMono</item>
+        <item name="android:windowBackground">@color/backgroundColorMono</item>
+
     </style>
 
     <!-- Button style for Monochromatism -->
@@ -43,6 +45,7 @@
         <item name="android:buttonStyle">@style/ButtonStyleTritan</item>
         <item name="buttonColor">@color/buttonColorTritan</item>
         <item name="backgroundColor">@color/backgroundColorTritan</item>
+        <item name="android:windowBackground">@color/backgroundColorTritan</item>
     </style>
 
     <!-- Button style for Tritanopia -->
@@ -59,7 +62,7 @@
         <item name="android:textColor">@color/deuteranTextColor</item>
         <item name="android:buttonStyle">@style/ButtonStyleDeuteran</item>
         <item name="buttonColor">@color/buttonColorDeuteran</item>
-        <item name="backgroundColor">@color/backgroundColorDeuteran</item>
+        <item name="android:windowBackground">@color/backgroundColorDeuteran</item>
     </style>
 
     <!-- Button style for Deuteranopia and Protanopia -->

@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
 
@@ -44,6 +45,15 @@ class LoginActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             login()
+        }
+
+        // Set the button color based on the current theme
+        when (themeId) {
+            R.style.Theme_VisionBlend -> btnLogin.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorDefault)
+            R.style.Theme_VisionBlend_Monochromatism -> btnLogin.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorMono)
+            R.style.Theme_VisionBlend_Tritanopia -> btnLogin.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorTritan)
+            R.style.Theme_VisionBlend_Deuteranopia -> btnLogin.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorDeuteran)
+            // Add more cases if you have more themes
         }
 
         tvRedirectSignUp.setOnClickListener {
