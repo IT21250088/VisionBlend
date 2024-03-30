@@ -11,4 +11,8 @@
     <string name="name">name</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
+    <string name="Forgot_Password">Forgot password</string>
+    <string name="don_t_have_an_account">don\'t have an account sign in</string>
+    <string name="forgotpassword">Forgot password</string>
+    <string name="signup">Signup</string>
 </resources>

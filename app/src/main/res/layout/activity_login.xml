@@ -4,38 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#FFFFFF"
     tools:context=".LoginActivity">
 
     <LinearLayout
-        android:layout_width="317dp"
-        android:layout_height="201dp"
+        android:id="@+id/linearLayout5"
+        android:layout_width="315dp"
+        android:layout_height="175dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.441">
+        app:layout_constraintVertical_bias="0.733">
 
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="283dp"
-            android:layout_height="wrap_content"
+            android:layout_width="276dp"
+            android:layout_height="65dp"
             android:layout_margin="15dp"
             android:backgroundTint="#348C37"
-            android:text="Login" />
-
-        <TextView
-            android:id="@+id/forgotpassword"
-            android:layout_width="274dp"
-            android:layout_height="23dp"
-            android:layout_margin="15dp"
-            android:backgroundTint="#8F3939"
-            android:gravity="center_horizontal"
-            android:minHeight="48dp"
-            android:onClick="resetPassword"
-            android:text="@string/forgot_password"
-            android:textColor="#18206F"
-            android:textSize="16sp" />
+            android:text="Login"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tvRedirectSignUp"
@@ -45,69 +35,81 @@
             android:gravity="center_horizontal"
             android:text="don't have an account sign in"
             android:textColor="#18206F"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <EditText
         android:id="@+id/etEmailAddress"
-        android:layout_width="282dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="44dp"
+        android:layout_width="304dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="508dp"
         android:autofillHints="emailAddress"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:drawableStart="@android:drawable/sym_action_email"
+        android:drawableTint="#100F0F"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:textColorHint="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/etPassword"
+        android:textColorHint="#090909"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.852" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="39dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="176dp"
-        app:layout_constraintEnd_toStartOf="@+id/etPassword"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_lock_lock"
-        app:tint="#121111"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="36dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="120dp"
-        app:layout_constraintEnd_toStartOf="@+id/etEmailAddress"
-        app:layout_constraintHorizontal_bias="0.727"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/sym_action_email"
-        app:tint="#121111" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="284dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="172dp"
+        android:layout_width="302dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="24dp"
         android:autofillHints="password"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:drawableStart="@android:drawable/ic_lock_lock"
+        android:drawableTint="#100F0F"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:textColorHint="#757575"
+        android:textColorHint="#FF090909"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEmailAddress"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/forgotpassword"
+        android:layout_width="178dp"
+        android:layout_height="24dp"
+        android:layout_margin="15dp"
+        android:layout_marginTop="92dp"
+        android:backgroundTint="#8F3939"
+        android:gravity="center_horizontal"
+        android:minHeight="48dp"
+        android:onClick="resetPassword"
+        android:text="@string/forgotpassword"
+        android:textColor="#18206F"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.815"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="97dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="280dp"
+        android:text="Login"
+        android:textColor="#0B0B0B"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/etEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.358" />
 
     <!--    <Button-->
     <!--        android:id="@+id/btnLogin"-->
