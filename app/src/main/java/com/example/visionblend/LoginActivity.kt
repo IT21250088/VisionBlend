@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
 
@@ -23,6 +24,13 @@ class LoginActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Retrieve the theme from the shared preferences
+        val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
+        val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
+        // Set the theme
+        setTheme(themeId)
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
@@ -37,6 +45,15 @@ class LoginActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             login()
+        }
+
+        // Set the button color based on the current theme
+        when (themeId) {
+            R.style.Theme_VisionBlend -> btnLogin.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorDefault)
+            R.style.Theme_VisionBlend_Monochromatism -> btnLogin.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorMono)
+            R.style.Theme_VisionBlend_Tritanopia -> btnLogin.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorTritan)
+            R.style.Theme_VisionBlend_Deuteranopia -> btnLogin.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorDeuteran)
+            // Add more cases if you have more themes
         }
 
         tvRedirectSignUp.setOnClickListener {
@@ -59,23 +76,73 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun login() {
-        val email = etEmail.text.toString()
-        val pass = etPass.text.toString()
-        // calling signInWithEmailAndPassword(email, pass)
-        // function using Firebase auth object
-        // On successful response Display a Toast
-        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this) {
-            if (it.isSuccessful) {
-                Toast.makeText(this, "Successfully LoggedIn", Toast.LENGTH_SHORT).show()
-                speakOut("Successfully LoggedIn")
-            } else {
-                Toast.makeText(this, "Log In failed ", Toast.LENGTH_SHORT).show()
-                speakOut("Log In failed")
+//    private fun login() {
+//        val email = etEmail.text.toString()
+//        val pass = etPass.text.toString()
+//        // calling signInWithEmailAndPassword(email, pass)
+//        // function using Firebase auth object
+//        // On successful response Display a Toast
+//        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this) {
+//            if (it.isSuccessful) {
+//                Toast.makeText(this, "Successfully LoggedIn", Toast.LENGTH_SHORT).show()
+//                speakOut("Successfully LoggedIn")
+//                val intent = Intent(this, viewprofile::class.java)
+//                startActivity(intent)
+//            } else {
+//                Toast.makeText(this, "Log In failed ", Toast.LENGTH_SHORT).show()
+//                speakOut("Log In failed")
+//
+//            }
+//        }
+//    }
+private fun login() {
+    val email = etEmail.text.toString()
+    val pass = etPass.text.toString()
 
-            }
+    // Check if email field is empty
+    if (email.isEmpty()) {
+        Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show()
+        speakOut("Please enter your email address")
+        return
+    }
+
+    // Check if password field is empty
+    if (pass.isEmpty()) {
+        Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show()
+        speakOut("Please enter your password")
+        return
+    }
+
+    // Check if email is empty or does not contain '@' symbol
+    if (!email.contains('@')) {
+        Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
+        speakOut("Please enter a valid email address")
+        return
+    }
+
+    // Check if password is less than 6 characters
+    if (pass.length < 6) {
+        Toast.makeText(this, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show()
+        speakOut("Password must be at least 6 characters long")
+        return
+    }
+
+    // Perform Firebase authentication only if all fields pass validation
+    auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this) {
+        if (it.isSuccessful) {
+            Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_SHORT).show()
+            speakOut("Successfully Logged In")
+            val intent = Intent(this, viewprofile::class.java)
+            startActivity(intent)
+        } else {
+            Toast.makeText(this, "Log In failed", Toast.LENGTH_SHORT).show()
+            speakOut("Log In failed")
         }
     }
+}
+
+
+
 
     fun resetPassword(view: View) {
         // getting email from the user

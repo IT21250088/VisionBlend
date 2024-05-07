@@ -18,9 +18,8 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var etConfPass: EditText
     private lateinit var etPass: EditText
     private lateinit var btnSignUp: Button
-    private lateinit var tvRedirectLogin: TextView
+//    private lateinit var tvRedirectLogin: TextView
     private lateinit var etName: EditText
-
 
     // Create Firebase authentication object
     private lateinit var auth: FirebaseAuth
@@ -28,11 +27,13 @@ class SignUpActivity : AppCompatActivity() {
     //private lateinit var database: DatabaseReference
     private lateinit var database: DatabaseReference
 
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
+    // Retrieve the theme from the shared preferences
+        val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
+        val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
+        // Set the theme
+        setTheme(themeId)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
@@ -41,9 +42,8 @@ class SignUpActivity : AppCompatActivity() {
         etConfPass = findViewById(R.id.etSConfPassword)
         etPass = findViewById(R.id.etSPassword)
         btnSignUp = findViewById(R.id.btnSSigned)
-        tvRedirectLogin = findViewById(R.id.tvRedirectLogin)
+//        tvRedirectLogin = findViewById(R.id.tvRedirectLogin)
         etName = findViewById(R.id.etSUsername)
-
 
         // Initialize auth object
         auth = FirebaseAuth.getInstance()
@@ -56,10 +56,10 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         // Switch from login Activity to sign Activity
-        tvRedirectLogin.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
-        }
+//        tvRedirectLogin.setOnClickListener {
+//            val intent = Intent(this, SignUpActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 
     //   voice out put
@@ -72,7 +72,6 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun signUpUser() {
         val name = etName.text.toString()

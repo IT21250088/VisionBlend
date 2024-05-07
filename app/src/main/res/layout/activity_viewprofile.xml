@@ -7,4 +7,77 @@
     android:layout_height="match_parent"
     tools:context=".viewprofile">
 
+    <ImageView
+        android:id="@+id/imgProPic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.167"
+        app:srcCompat="@drawable/user" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="140dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="36dp"
+        android:text="Edit Profile"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgLock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/txtfullname"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtfullname"
+        app:srcCompat="@android:drawable/ic_lock_lock" />
+
+    <TextView
+        android:id="@+id/txtfullname"
+        android:layout_width="84dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="176dp"
+        android:text="Full Name :"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgProPic" />
+
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="86dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="148dp"
+        android:text="Email  :"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="314dp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="118dp"
+        android:layout_height="31dp"
+        android:text=""
+        app:layout_constraintStart_toEndOf="@+id/txtfullname"
+        tools:layout_editor_absoluteY="269dp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="119dp"
+        android:layout_height="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txtEmail"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintVertical_bias="0.034" />
 </androidx.constraintlayout.widget.ConstraintLayout>
