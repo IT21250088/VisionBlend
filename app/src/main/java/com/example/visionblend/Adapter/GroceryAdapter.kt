@@ -1,4 +1,4 @@
-package Adapter
+package com.example.visionblend.Adapter
 
 import android.view.LayoutInflater
 import android.view.View

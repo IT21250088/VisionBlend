@@ -31,6 +31,7 @@
     <color name="deuteranTextColor">#000000</color>
     <color name="buttonColorDeuteran">#1976D2</color>
     <color name="backgroundColorDeuteran">#4FBFF1</color>
+    <color name="light_gray">#e0e0e0</color>
 
 
 </resources>
