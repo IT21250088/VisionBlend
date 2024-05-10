@@ -19,6 +19,7 @@
         android:id="@+id/navigation_cart"
         android:icon="@drawable/icons8_cart_100"
         android:title="Cart" />
+
     <item
         android:id="@+id/navigation_menu"
         android:icon="@drawable/icons8_menu_150"

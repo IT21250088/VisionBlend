@@ -12,6 +12,9 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
+import android.view.MotionEvent
+import com.example.visionblend.Magnification.magnify
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -19,11 +22,17 @@ class LoginActivity : AppCompatActivity() {
     lateinit var etEmail: EditText
     private lateinit var etPass: EditText
     lateinit var btnLogin: Button
+    private lateinit var magnificationUtil: magnify
+    private lateinit var textViewToMagnify: TextView
 
     // Creating firebaseAuth object
     lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        textViewToMagnify = findViewById(R.id.textView12)
+
+        magnificationUtil = magnify(textViewToMagnify)
         // Retrieve the theme from the shared preferences
         val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
         val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
@@ -62,6 +71,12 @@ class LoginActivity : AppCompatActivity() {
             // using finish() to end the activity
             finish()
         }
+    }
+
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        magnificationUtil.onTouchEvent(event!!)
+        return super.onTouchEvent(event)
     }
 
 //   voice out put
