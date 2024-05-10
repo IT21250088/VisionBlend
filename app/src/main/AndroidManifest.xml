@@ -42,7 +42,28 @@
         <activity
             android:name=".SignUpActivity"
             android:exported="true" />
+        <activity
+            android:name=".FruitsAndVegetables"
+            android:exported="true"/>
+        <activity
+            android:name=".DiaryProducts"
+            android:exported="true"/>
+        <activity
+            android:name=".MeatAndFish"
+            android:exported="true"/>
+        <activity
+            android:name=".CareProducts"
+            android:exported="true"/>
+        <activity
+            android:name=".Item"
+            android:exported="true"/>
 
+        <activity
+            android:name=".Snacks"
+            android:exported="true"/>
+        <activity
+            android:name=".Beverages"
+            android:exported="true" />
         <activity
             android:name=".viewprofile"
             android:exported="true" />
