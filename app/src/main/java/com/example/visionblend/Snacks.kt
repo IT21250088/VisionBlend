@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class Snacks : AppCompatActivity() {
-
+//
 
     private val itemList = listOf(
         Item(R.drawable.bugles, "Bugles", 1.99),
