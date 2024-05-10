@@ -16,7 +16,7 @@
         android:theme="@style/Theme.VisionBlend"
         tools:targetApi="31">
         <activity
-            android:name="8"
+            android:name=".Category"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
