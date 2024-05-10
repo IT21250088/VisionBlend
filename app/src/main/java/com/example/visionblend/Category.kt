@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -31,6 +32,18 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
         textView2 = findViewById(R.id.textView2)
         textView3 = findViewById(R.id.textView3)
         mic = findViewById(R.id.mic)
+
+        // Find the button by its id
+        val otherButton = findViewById<Button>(R.id.other)
+
+        // Set OnClickListener to the button
+        otherButton.setOnClickListener {
+            // Create an Intent to navigate to the login activity
+            val intent = Intent(this, LoginActivity::class.java)
+
+            // Start the login activity
+            startActivity(intent)
+        }
 
 
         // Initialize the mic button
@@ -75,6 +88,7 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
                     textView3.performClick()
                     speakOut("You selected three.")
                 }
+
                 else -> speakOut("Unrecognized command: $spokenText")
             }
         }
@@ -125,7 +139,7 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
             }else {
                 // If the TTS engine is successfully initialized, greet the user
                 speakOut("Hi, welcome to Vision Blend! Please select a category by saying the number. number 1 for monochromatism people. number 2 for" +
-                        " tritanopia people! number 3 for deuteranopia and protanopia people. for example, say number 1 to select monochromatism. click on the mic button to start.")
+                        " tritanopia people! number 3 for deuteranopia and protanopia people. for example, say number 1 to select monochromatism.Others can use other button. click on the mic button to start.")
 
             }
         } else {

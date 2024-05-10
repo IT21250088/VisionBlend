@@ -7,19 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColorDefault"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="21dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="398dp"
         android:layout_height="441dp"
-        android:layout_marginBottom="152dp"
         android:orientation="vertical"
 
         android:padding="15dp"
         android:paddingTop="40dp"
         android:paddingBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="1dp">
+        tools:layout_editor_absoluteX="6dp">
 
         <EditText
             android:id="@+id/etSUsername"
@@ -105,9 +119,9 @@
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="105dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="127dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="40dp"
         android:layout_marginBottom="36dp"
         android:text="Sign up"
         android:textSize="26sp"
@@ -115,21 +129,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888" />
-
-    <ScrollView
-        android:layout_width="416dp"
-        android:layout_height="511dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+        app:layout_constraintVertical_bias="0.48" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
