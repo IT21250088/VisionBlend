@@ -22,10 +22,10 @@
             android:name=".Description"
             android:exported="false" />
         <activity
-            android:name=".Category"
+            android:name=".Home"
             android:exported="false" />
         <activity
-            android:name=".Home"
+            android:name=".Category"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

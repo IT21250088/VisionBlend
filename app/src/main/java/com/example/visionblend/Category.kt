@@ -1,15 +1,19 @@
 package com.example.visionblend
-
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
+import android.view.GestureDetector
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Locale
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.GestureDetectorCompat
 
 
 class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
@@ -20,9 +24,21 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
     private lateinit var textView2: TextView
     private lateinit var textView3: TextView
     private lateinit var mic: ImageButton
+    private lateinit var mScaleGestureDetector: ScaleGestureDetector
+    private lateinit var mGestureDetector: GestureDetectorCompat
+
+    private var mScaleFactor = 1.0f
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
+
+        // Create a ScaleGestureDetector
+        mScaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
+
+
+        // Create a GestureDetector
+        mGestureDetector = GestureDetectorCompat(this, GestureListener())
+
 
         // Initialize TextToSpeech
         tts = TextToSpeech(this, this)
@@ -39,6 +55,89 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
     }
+
+
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        // Let the ScaleGestureDetector inspect all events
+        mScaleGestureDetector.onTouchEvent(event)
+
+        // Let the GestureDetector inspect all events
+        mGestureDetector.onTouchEvent(event)
+
+        return true
+    }
+
+    private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+        override fun onScroll(
+            e1: MotionEvent?,
+            e2: MotionEvent,
+            distanceX: Float,
+            distanceY: Float
+        ): Boolean {
+            // Only allow movement if the view is magnified
+            if (mScaleFactor > 1.0f) {
+                // Get the ConstraintLayout
+                val constraintLayout = findViewById<ConstraintLayout>(R.id.activity_category)
+
+                // Iterate over all child views of the ConstraintLayout
+                for (i in 0 until constraintLayout.childCount) {
+                    val child = constraintLayout.getChildAt(i)
+
+                    // Move the child view
+                    child.translationX -= distanceX
+                    child.translationY -= distanceY
+                }
+            }
+
+            return true
+        }
+
+        override fun onDoubleTap(e: MotionEvent): Boolean {
+            // Toggle between actual size and magnified size
+            mScaleFactor = if (mScaleFactor > 1.0f) {
+                1.0f
+            } else {
+                2.0f // Change this value to control the magnification level
+            }
+
+            // Get the ConstraintLayout
+            val constraintLayout = findViewById<ConstraintLayout>(R.id.activity_category)
+
+            // Iterate over all child views of the ConstraintLayout
+            for (i in 0 until constraintLayout.childCount) {
+                val child = constraintLayout.getChildAt(i)
+
+                // Apply the scaling to the child view
+                child.scaleX = mScaleFactor
+                child.scaleY = mScaleFactor
+            }
+
+            return true
+        }
+    }
+
+    private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        override fun onScale(scaleGestureDetector: ScaleGestureDetector): Boolean {
+            mScaleFactor *= scaleGestureDetector.scaleFactor
+            mScaleFactor = Math.max(1.0f, Math.min(mScaleFactor, 5.0f)) // Set the minimum scale factor to 1.0f
+
+            // Get the ConstraintLayout
+            val constraintLayout = findViewById<ConstraintLayout>(R.id.activity_category)
+
+            // Iterate over all child views of the ConstraintLayout
+            for (i in 0 until constraintLayout.childCount) {
+                val child = constraintLayout.getChildAt(i)
+
+                // Apply the scaling to the child view
+                child.scaleX = mScaleFactor
+                child.scaleY = mScaleFactor
+            }
+
+            return true
+        }
+    }
+
 
     private fun startVoiceRecognition() {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
