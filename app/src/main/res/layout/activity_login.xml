@@ -5,10 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
 
-
     android:layout_height="match_parent"
-    xmlns:andriod="http://schemas.android.com/apk/res/android"
-
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -22,8 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgotpassword">
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.674">
 
         <Button
             android:id="@+id/btnLogin"
@@ -54,7 +49,6 @@
         android:layout_height="53dp"
         android:layout_marginStart="53dp"
         android:layout_marginTop="29dp"
-        android:layout_marginBottom="452dp"
         android:autofillHints="emailAddress"
         android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:drawableStart="@android:drawable/sym_action_email"
@@ -111,17 +105,15 @@
         android:layout_height="37dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="288dp"
         android:text="Login"
         android:textColor="#0B0B0B"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-        app:layout_constraintBottom_toTopOf="@+id/etEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
