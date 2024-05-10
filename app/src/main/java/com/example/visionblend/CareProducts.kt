@@ -17,7 +17,7 @@ class CareProducts : AppCompatActivity() {
         Item(R.drawable.olay, "Olay", 2.49),
         Item(R.drawable.olay1, "Olay", 2.49),
         Item(R.drawable.golw_screen, "Glow Screen", 4.99),
-
+        Item(R.drawable.nivea, "Nivea", 1.29),
 
     )
 
