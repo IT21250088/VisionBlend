@@ -16,10 +16,12 @@
         android:theme="@style/Theme.VisionBlend"
         tools:targetApi="31">
         <activity
+            android:name=".Item"
+            android:exported="true">
 
-            android:name=".Category"
-
-
+        </activity>
+        <activity
+            android:name=".Categories"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,42 +29,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".Categories"
-            android:exported="true">
-
-
-            <!--        <activity-->
-            <!--            android:name=".LoginActivity"-->
-            <!--            android:exported="true">-->
-            <!--        </activity>-->
-
-            <!--        <activity-->
-            <!--            android:name=".SignUpActivity"-->
-            <!--            android:exported="true">-->
-            <!--        </activity>-->
-
-
-        </activity>
-        <!--        <activity-->
-        <!--            android:name=".MainActivity"-->
-        <!--            android:exported="true"></activity>-->
+            android:name=".FruitsAndVegetables"
+            android:exported="true"></activity>
+        <activity
+            android:name=".DiaryProducts"
+            android:exported="true"></activity>
+        <activity
+            android:name=".MeatAndFish"
+            android:exported="true"></activity>
+        <activity
+            android:name=".CareProducts"
+            android:exported="true"></activity>
+        <activity
+            android:name=".Snacks"
+            android:exported="true"/>
+        <activity
+            android:name=".Beverages"
+            android:exported="true" />
+        <activity
+            android:name=".Category"
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
-
             android:name=".SignUpActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".viewprofile"
-            android:exported="true">
-        </activity>
-
-
+            android:exported="true" />
     </application>
-
-    <!--    abc-->
 
 </manifest>
