@@ -34,7 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="314dp"
@@ -59,6 +58,7 @@
         android:text="4.Other"
         android:textAlignment="textStart"
         android:textAllCaps="false"
+        android:text="3.Deuteranopia and Protanopia"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -74,6 +74,7 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
         android:text="@string/_2_tritanopia"
+        android:text="2.Tritanopia"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,10 +131,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.92"
         app:srcCompat="@drawable/voice" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/voice" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
