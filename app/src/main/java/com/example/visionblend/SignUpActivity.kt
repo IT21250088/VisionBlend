@@ -85,6 +85,18 @@ class SignUpActivity : AppCompatActivity() {
             speakOut("Fields cannot be blank")
             return
         }
+        // Validate email format
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
+            speakOut("Please enter a valid email address")
+            return
+        }
+        // Ensure the password is at least 6 characters long
+        if (pass.length < 6) {
+            Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+            speakOut("Password must be at least 6 characters")
+            return
+        }
 
         // Check if password and confirm password match
         if (pass != confirmPassword) {

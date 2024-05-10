@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:andriod="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
 
-    xmlns:andriod="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -13,15 +13,12 @@
         android:layout_width="315dp"
         android:layout_height="175dp"
 
+        android:layout_marginTop="20dp"
+
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.34"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintVertical_bias="0.674">
-
+        app:layout_constraintTop_toBottomOf="@+id/forgotpassword">
 
         <Button
             android:id="@+id/btnLogin"
@@ -50,7 +47,8 @@
         android:id="@+id/etEmailAddress"
         android:layout_width="304dp"
         android:layout_height="53dp"
-        android:layout_marginBottom="452dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="29dp"
         android:autofillHints="emailAddress"
         android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:drawableStart="@android:drawable/sym_action_email"
@@ -60,10 +58,8 @@
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:textColorHint="#090909"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -87,8 +83,8 @@
 
     <TextView
         android:id="@+id/forgotpassword"
-        android:layout_width="178dp"
-        android:layout_height="24dp"
+        android:layout_width="177dp"
+        android:layout_height="34dp"
         android:layout_margin="15dp"
         android:layout_marginTop="92dp"
         android:backgroundTint="#8F3939"
@@ -105,34 +101,19 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="97dp"
-        android:layout_height="32dp"
+        android:layout_width="104dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="288dp"
         android:text="Login"
         android:textColor="#0B0B0B"
         android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/etEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-    <!--    <Button-->
-    <!--        android:id="@+id/btnLogin"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="15dp"-->
-    <!--        android:background="@drawable/btn_primary"-->
-    <!--        android:backgroundTint="#517C1F"-->
 
-    <!--        android:text="@string/login"-->
-
-    <!--        android:textColor="#0277BD"-->
-    <!--        tools:ignore="VisualLintButtonSize"-->
-    <!--        tools:layout_editor_absoluteX="13dp"-->
-    <!--        tools:layout_editor_absoluteY="204dp" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
