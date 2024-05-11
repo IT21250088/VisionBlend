@@ -1,5 +1,6 @@
 package com.example.visionblend
 
+import Item
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,10 +22,15 @@ class Beverages : AppCompatActivity() {
         Item(R.drawable.sprite, "Sprite", 0.99),
         Item(R.drawable.redbull1, "RedBull", 2.99),
         Item(R.drawable.monster, "Monster", 2.99),
-
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Retrieve the theme from shared preferences
+        val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
+        val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
+        // Set the theme
+        setTheme(themeId)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fruits_and_vegetables)
 

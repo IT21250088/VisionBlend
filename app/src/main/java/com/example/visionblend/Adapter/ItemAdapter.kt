@@ -1,5 +1,6 @@
 package com.example.visionblend
 
+import Item
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

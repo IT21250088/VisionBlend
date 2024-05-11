@@ -50,7 +50,7 @@
 
     <!-- Button style for Tritanopia -->
     <style name="ButtonStyleTritan" parent="Widget.AppCompat.Button">
-        <item name="android:backgroundTint">@color/buttonColorTritan</item>
+        <item name="android:backgroundTint">@color/colorPrimaryTritan</item>
         <item name="android:textColor">@color/tritanTextColor</item>
     </style>
 

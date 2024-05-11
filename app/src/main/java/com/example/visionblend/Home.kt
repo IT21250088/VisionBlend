@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,14 +25,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import org.greenrobot.eventbus.ThreadMode
 
-
-
 class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
 
     lateinit var productLoadInterface: ProductLoadInterface
     lateinit var cartInterface: ICartLoadInterface
-
-
 
     override fun onStart() {
         super.onStart()
@@ -46,7 +41,6 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
             EventBus.getDefault().removeStickyEvent(UpdateCartEvent::class.java)
         EventBus.getDefault().unregister(this)
     }
-
 
     override fun onCartLoadSuccess(cartModelList: List<CartModel>?) {
         var cartSum = 0.0
@@ -68,12 +62,17 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Retrieve the theme from shared preferences
+        val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
+        val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
+        // Set the theme
+        setTheme(themeId)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         init()
         loadProductFromFirebase()
         countCartFromFirebase()
-
     }
 
     private fun countCartFromFirebase() {
@@ -116,7 +115,7 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
                         productLoadInterface.onProductLoadSuccess(productModels)
                     }
                     else
-                    productLoadInterface.onProductLoadFailed("Product not found")
+                        productLoadInterface.onProductLoadFailed("Product not found")
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -165,13 +164,10 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
     override fun onProductLoadSuccess(productModelList: List<ProductModel>?) {
         val adapter = MyProductAdapter(this,productModelList!!,cartInterface)
         recycler_product.adapter = adapter
-
     }
 
     override fun onProductLoadFailed(message: String?) {
         val mainLayout: ConstraintLayout = findViewById(R.id.mainlayout)
         Snackbar.make(mainLayout,message!!,Snackbar.LENGTH_LONG).show()
     }
-
 }
-
