@@ -18,6 +18,7 @@ import android.view.ScaleGestureDetector
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GestureDetectorCompat
 
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var tvRedirectSignUp: TextView
@@ -27,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var mScaleGestureDetector: ScaleGestureDetector
     private lateinit var mGestureDetector: GestureDetectorCompat
     private var mScaleFactor = 0.5f
+
 
     // Creating firebaseAuth object
     lateinit var auth: FirebaseAuth
@@ -89,6 +91,32 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+
+    private fun login() {
+        val email = etEmail.text.toString()
+        val pass = etPass.text.toString()
+
+        // Check if email field is empty
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show()
+            speakOut("Please enter your email address")
+            return
+        }
+
+        // Check if password field is empty
+        if (pass.isEmpty()) {
+            Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show()
+            speakOut("Please enter your password")
+            return
+        }
+
+        // Check if email is empty or does not contain '@' symbol
+        if (!email.contains('@')) {
+            Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
+            speakOut("Please enter a valid email address")
+            return
+        }
 
 
 
@@ -220,6 +248,7 @@ class LoginActivity : AppCompatActivity() {
             speakOut("Please enter a valid email address")
             return
         }
+
 
         // Check if password is less than 6 characters
         if (pass.length < 6) {

@@ -25,6 +25,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
+
         <activity
             android:name=".Category"
             android:exported="true">

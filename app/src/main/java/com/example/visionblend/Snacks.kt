@@ -1,20 +1,53 @@
 package com.example.visionblend
 
+import Item
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class Snacks : AppCompatActivity() {
+
+    private val itemList = listOf(
+        Item(R.drawable.nacho_chees, "Nacho Cheese", 1.99),
+        Item(R.drawable.chips, "Chips", 0.99),
+        Item(R.drawable.ritz_bites, "Ritz Bites", 1.99),
+        Item(R.drawable.harvest_snaps, "Harvest Snaps", 1.99),
+        Item(R.drawable.pita_chips, "Pita Chips", 1.99),
+        Item(R.drawable.cheez_it, "Cheez-It", 1.99),
+        Item(R.drawable.bugles, "Bugles", 1.99),
+
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Retrieve the theme from shared preferences
+        val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
+        val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
+        // Set the theme
+        setTheme(themeId)
+
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_snacks)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        setContentView(R.layout.activity_fruits_and_vegetables)
+
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.adapter = ItemAdapter(itemList)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        recyclerView.setHasFixedSize(true)
+
+        val searchView: SearchView = findViewById(R.id.searchView)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                (recyclerView.adapter as ItemAdapter).filter.filter(newText)
+                return false
+            }
+        })
     }
 }
