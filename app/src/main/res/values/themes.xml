@@ -3,7 +3,7 @@
     <style name="Theme.VisionBlend" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#38B11E</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">#38B11E</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/defaultTextColor</item>
         <item name="android:buttonStyle">@style/ButtonStyle</item>

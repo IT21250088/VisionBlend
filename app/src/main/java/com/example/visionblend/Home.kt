@@ -3,8 +3,8 @@ package com.example.visionblend
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.GestureDetector
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,15 +25,21 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import org.greenrobot.eventbus.ThreadMode
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
+import androidx.core.view.GestureDetectorCompat
 
 
 
 class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
 
-    lateinit var productLoadInterface: ProductLoadInterface
-    lateinit var cartInterface: ICartLoadInterface
+    private lateinit var productLoadInterface: ProductLoadInterface
+    private lateinit var cartInterface: ICartLoadInterface
+    private lateinit var recyclerProduct: RecyclerView
+    private lateinit var scaleGestureDetector: ScaleGestureDetector
+    private lateinit var gestureDetector: GestureDetector
 
-
+    private var scaleFactor = 1.0f
 
     override fun onStart() {
         super.onStart()
@@ -47,26 +53,6 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
         EventBus.getDefault().unregister(this)
     }
 
-
-    override fun onCartLoadSuccess(cartModelList: List<CartModel>?) {
-        var cartSum = 0.0
-        for (cartModel in cartModelList!!)
-            cartSum += cartModel.quantity.toDouble()
-    }
-
-    override fun onCartLoadFailed(message: String?) {
-        val mainLayout: ConstraintLayout = findViewById(R.id.mainlayout)
-        Snackbar.make(mainLayout,message!!,Snackbar.LENGTH_LONG).show()
-    }
-
-    lateinit var recycler_product: RecyclerView
-
-    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
-    public fun onUpdateCartEvent(event: UpdateCartEvent)
-    {
-        countCartFromFirebase()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -74,6 +60,14 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
         loadProductFromFirebase()
         countCartFromFirebase()
 
+        scaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
+        gestureDetector = GestureDetector(this, GestureListener())
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        scaleGestureDetector.onTouchEvent(event)
+        gestureDetector.onTouchEvent(event)
+        return true
     }
 
     private fun countCartFromFirebase() {
@@ -81,18 +75,19 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
         FirebaseDatabase.getInstance().getReference("Cart")
             .child("UNIQUE_USER_ID")
             .addListenerForSingleValueEvent(object : ValueEventListener {
-                @SuppressLint("SuspiciousIndentation")
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         for (cartSnapshot in snapshot.children) {
                             val cartModel = cartSnapshot.getValue(CartModel::class.java)
-                            cartModel!!.key = cartSnapshot.key
-                            cartModels.add(cartModel)
+                            cartModel?.let {
+                                it.key = cartSnapshot.key
+                                cartModels.add(it)
+                            }
                         }
                         cartInterface.onCartLoadSuccess(cartModels)
-                    }
-                    else
+                    } else {
                         cartInterface.onCartLoadFailed("Cart Empty")
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -105,18 +100,19 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
         val productModels: MutableList<ProductModel> = ArrayList()
         FirebaseDatabase.getInstance().getReference("product")
             .addListenerForSingleValueEvent(object : ValueEventListener {
-                @SuppressLint("SuspiciousIndentation")
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         for (productSnapshot in snapshot.children) {
                             val productModel = productSnapshot.getValue(ProductModel::class.java)
-                            productModel!!.key = productSnapshot.key
-                            productModels.add(productModel)
+                            productModel?.let {
+                                it.key = productSnapshot.key
+                                productModels.add(it)
+                            }
                         }
                         productLoadInterface.onProductLoadSuccess(productModels)
+                    } else {
+                        productLoadInterface.onProductLoadFailed("Product not found")
                     }
-                    else
-                    productLoadInterface.onProductLoadFailed("Product not found")
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -127,50 +123,96 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
 
     private fun init() {
         productLoadInterface = this
-        recycler_product = findViewById(R.id.recyclerView)
         cartInterface = this
+        recyclerProduct = findViewById(R.id.recyclerView)
 
         val gridLayoutManager = GridLayoutManager(this, 2)
-        recycler_product.layoutManager = gridLayoutManager
-        recycler_product.addItemDecoration(SpacesItemDecoration())
+        recyclerProduct.layoutManager = gridLayoutManager
+        recyclerProduct.addItemDecoration(SpacesItemDecoration())
 
-        // Define bottomNavigationView
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
-
-        bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
+        bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
                     val intent = Intent(this, Home::class.java)
                     startActivity(intent)
                     true
                 }
-
                 R.id.navigation_category -> {
                     val intent = Intent(this, Categories::class.java)
                     startActivity(intent)
                     true
                 }
-
                 R.id.navigation_cart -> {
                     val intent = Intent(this, Cart::class.java)
                     startActivity(intent)
                     true
                 }
 
+                R.id.navigation_profile -> {
+                    val intent = Intent(this,viewprofile::class.java)
+                    startActivity(intent)
+                    true
+                }
                 else -> false
             }
         }
     }
 
     override fun onProductLoadSuccess(productModelList: List<ProductModel>?) {
-        val adapter = MyProductAdapter(this,productModelList!!,cartInterface)
-        recycler_product.adapter = adapter
-
+        val adapter = MyProductAdapter(this, productModelList!!, cartInterface)
+        recyclerProduct.adapter = adapter
     }
 
     override fun onProductLoadFailed(message: String?) {
-        val mainLayout: ConstraintLayout = findViewById(R.id.mainlayout)
-        Snackbar.make(mainLayout,message!!,Snackbar.LENGTH_LONG).show()
+        val mainLayout: ConstraintLayout = findViewById(R.id.activity_home)
+        Snackbar.make(mainLayout, message!!, Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun onCartLoadSuccess(cartModelList: List<CartModel>?) {
+        var cartSum = 0.0
+        for (cartModel in cartModelList!!)
+            cartSum += cartModel.quantity.toDouble()
+    }
+
+    override fun onCartLoadFailed(message: String?) {
+        val mainLayout: ConstraintLayout = findViewById(R.id.activity_home)
+        Snackbar.make(mainLayout, message!!, Snackbar.LENGTH_LONG).show()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public fun onUpdateCartEvent(event: UpdateCartEvent) {
+        countCartFromFirebase()
+    }
+
+    private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+        override fun onScroll(
+            e1: MotionEvent?,
+            e2: MotionEvent,
+            distanceX: Float,
+            distanceY: Float
+        ): Boolean {
+            // Handle scroll events
+            return true
+        }
+
+        override fun onDoubleTap(e: MotionEvent): Boolean {
+            // Handle double tap events
+            return true
+        }
+    }
+
+    private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        override fun onScale(detector: ScaleGestureDetector): Boolean {
+            scaleFactor *= detector.scaleFactor
+            scaleFactor = Math.max(1.0f, Math.min(scaleFactor, 1.5f)) // Clamp scale factor
+
+            // Apply scale factor to your views
+            recyclerProduct.scaleX = scaleFactor
+            recyclerProduct.scaleY = scaleFactor
+
+            return true
+        }
     }
 
 }

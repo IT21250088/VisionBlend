@@ -21,7 +21,7 @@
         android:title="Cart" />
 
     <item
-        android:id="@+id/navigation_menu"
-        android:icon="@drawable/icons8_menu_150"
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/icons8_male_user_50"
         android:title="Menu" />
 </menu>
