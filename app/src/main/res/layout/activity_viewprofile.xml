@@ -84,65 +84,10 @@
         app:layout_constraintTop_toBottomOf="@+id/txtfullname" />
 
     <Button
-        android:id="@+id/deleteProfileButton"
-        android:layout_width="384dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginEnd="14dp"
-        android:backgroundTint="#FBFBFB"
-        android:drawableStart="@android:drawable/ic_delete"
-        android:drawableTint="#FF9800"
-        android:text="     Delete profile"
-        android:textAlignment="viewStart"
-        android:textSize="20sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/logoutButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailbutton" />
-
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="384dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginEnd="14dp"
-        android:backgroundTint="#FBFBFB"
-        android:drawableStart="@android:drawable/ic_lock_power_off"
-        android:drawableTint="#F44336"
-        android:text="     logout"
-        android:textAlignment="viewStart"
-        android:textSize="20sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteProfileButton" />
-
-    <Button
-        android:id="@+id/updatebutton"
-        android:layout_width="384dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginEnd="14dp"
-        android:backgroundTint="#FBFBFB"
-        android:drawableStart="@drawable/edit_24px"
-        android:text="     Update"
-        android:textAlignment="viewStart"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/emailbutton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
-
-    <Button
         android:id="@+id/emailbutton"
         android:layout_width="384dp"
         android:layout_height="57dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginStart="14dp"
         android:backgroundTint="#FBFBFB"
         android:drawableStart="@android:drawable/stat_notify_chat"
         android:drawableTint="#54A138"
@@ -151,8 +96,71 @@
         android:textSize="20sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/deleteProfileButton"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updatebutton" />
+
+    <Button
+        android:id="@+id/deleteProfileButton"
+        android:layout_width="384dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="#FBFBFB"
+        android:drawableStart="@android:drawable/ic_delete"
+        android:drawableTint="#FF9800"
+        android:text="  Delete profile"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/reportButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailbutton" />
+
+    <Button
+        android:id="@+id/reportButton"
+        android:layout_width="384dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="#FBFBFB"
+        android:drawableStart="?attr/actionModePasteDrawable"
+        android:drawableTint="#FF9800"
+        android:text="     Report"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/logoutButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteProfileButton" />
+
+    <Button
+        android:id="@+id/updatebutton"
+        android:layout_width="384dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="14dp"
+        android:backgroundTint="#FBFBFB"
+        android:drawableStart="@drawable/edit_24px"
+        android:text="     Update"
+        android:textAlignment="viewStart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/emailbutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showemail" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="384dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="14dp"
+        android:backgroundTint="#FBFBFB"
+        android:drawableStart="@android:drawable/ic_lock_power_off"
+        android:drawableTint="#F44336"
+        android:text="     logout"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reportButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
