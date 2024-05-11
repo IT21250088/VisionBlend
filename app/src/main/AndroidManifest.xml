@@ -20,11 +20,12 @@
             android:name=".Cart"
             android:exported="false" />
         <activity
-            android:name=".Description"
+            android:name=".Checkout"
             android:exported="false" />
         <activity
-            android:name=".Home"
-            android:exported="true" />
+            android:name=".LoginActivity"
+            android:exported="false" />
+
         <activity
             android:name=".Category"
             android:exported="true">
@@ -37,7 +38,7 @@
             android:name=".Categories"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Home"
             android:exported="true" />
         <activity
             android:name=".SignUpActivity"

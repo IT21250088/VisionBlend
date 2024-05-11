@@ -28,7 +28,7 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
     private lateinit var mScaleGestureDetector: ScaleGestureDetector
     private lateinit var mGestureDetector: GestureDetectorCompat
 
-    private var mScaleFactor = 1.0f
+    private var mScaleFactor = 0.5f
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
@@ -70,7 +70,6 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
 
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
         // Let the ScaleGestureDetector inspect all events
         mScaleGestureDetector.onTouchEvent(event)
@@ -97,9 +96,15 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
                 for (i in 0 until constraintLayout.childCount) {
                     val child = constraintLayout.getChildAt(i)
 
-                    // Move the child view
-                    child.translationX -= distanceX
-                    child.translationY -= distanceY
+                    // Calculate the new translations
+                    val newTranslationX = child.translationX - distanceX
+                    val newTranslationY = child.translationY - distanceY
+
+
+                    // Limit the translations to certain bounds
+                    val maxTranslation = 200.0f // Change this value to set the maximum allowed movement
+                    child.translationX = Math.max(-maxTranslation, Math.min(newTranslationX, maxTranslation))
+                    child.translationY = Math.max(-maxTranslation, Math.min(newTranslationY, maxTranslation))
                 }
             }
 
@@ -109,9 +114,21 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
         override fun onDoubleTap(e: MotionEvent): Boolean {
             // Toggle between actual size and magnified size
             mScaleFactor = if (mScaleFactor > 1.0f) {
+                // Get the ConstraintLayout
+                val constraintLayout = findViewById<ConstraintLayout>(R.id.activity_category)
+
+                // Iterate over all child views of the ConstraintLayout
+                for (i in 0 until constraintLayout.childCount) {
+                    val child = constraintLayout.getChildAt(i)
+
+                    // Reset the translations of the child view
+                    child.translationX = 0f
+                    child.translationY = 0f
+                }
+
                 1.0f
             } else {
-                2.0f // Change this value to control the magnification level
+                1.5f // Change this value to control the magnification level
             }
 
             // Get the ConstraintLayout
@@ -129,11 +146,13 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
             return true
         }
     }
+
+
 
     private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
         override fun onScale(scaleGestureDetector: ScaleGestureDetector): Boolean {
             mScaleFactor *= scaleGestureDetector.scaleFactor
-            mScaleFactor = Math.max(1.0f, Math.min(mScaleFactor, 5.0f)) // Set the minimum scale factor to 1.0f
+            mScaleFactor = Math.max(1.0f, Math.min(mScaleFactor, 1.5f)) // Set the minimum scale factor to 1.0f
 
             // Get the ConstraintLayout
             val constraintLayout = findViewById<ConstraintLayout>(R.id.activity_category)
@@ -150,6 +169,7 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
             return true
         }
     }
+
 
 
     private fun startVoiceRecognition() {

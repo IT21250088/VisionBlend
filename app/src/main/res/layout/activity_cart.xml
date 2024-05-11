@@ -12,11 +12,12 @@
         android:id="@+id/cardView"
         android:layout_width="370dp"
         android:layout_height="75dp"
+        android:layout_marginTop="60dp"
         android:padding="10dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_cart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -36,11 +37,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_cart"
         android:layout_width="409dp"
-        android:layout_height="639dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="571dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.049" />
 
     <Button
         android:id="@+id/button2"
