@@ -42,7 +42,7 @@ class SignUpActivity : AppCompatActivity() {
         etConfPass = findViewById(R.id.etSConfPassword)
         etPass = findViewById(R.id.etSPassword)
         btnSignUp = findViewById(R.id.btnSSigned)
-//        tvRedirectLogin = findViewById(R.id.tvRedirectLogin)
+           //tvRedirectLogin = findViewById(R.id.tvRedirectLogin)
         etName = findViewById(R.id.etSUsername)
 
         // Initialize auth object
@@ -54,12 +54,18 @@ class SignUpActivity : AppCompatActivity() {
         btnSignUp.setOnClickListener {
             signUpUser()
         }
+        btnSignUp.setOnClickListener {
+            // Sign up the user
+            signUpUser()
 
-        // Switch from login Activity to sign Activity
-//        tvRedirectLogin.setOnClickListener {
-//            val intent = Intent(this, SignUpActivity::class.java)
-//            startActivity(intent)
-//        }
+            // Create an Intent to navigate to the login activity
+            val intent = Intent(this, LoginActivity::class.java)
+
+            // Start the login activity
+            startActivity(intent)
+        }
+
+
     }
 
     //   voice out put
