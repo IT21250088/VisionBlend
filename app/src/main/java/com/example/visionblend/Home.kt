@@ -29,9 +29,7 @@ import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import androidx.core.view.GestureDetectorCompat
 
-class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
-
-
+class Home : AppCompatActivity(), ProductLoadInterface, ICartLoadInterface {
 
     private lateinit var productLoadInterface: ProductLoadInterface
     private lateinit var cartInterface: ICartLoadInterface
@@ -53,7 +51,6 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
         EventBus.getDefault().unregister(this)
     }
 
-
     override fun onCartLoadSuccess(cartModelList: List<CartModel>?) {
         var cartSum = 0.0
         for (cartModel in cartModelList!!)
@@ -61,18 +58,16 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
     }
 
     override fun onCartLoadFailed(message: String?) {
-        val mainLayout: ConstraintLayout = findViewById(R.id.mainlayout)
-        Snackbar.make(mainLayout,message!!,Snackbar.LENGTH_LONG).show()
+        val mainLayout: ConstraintLayout = findViewById(R.id.activity_home)
+        Snackbar.make(mainLayout, message!!, Snackbar.LENGTH_LONG).show()
     }
 
     lateinit var recycler_product: RecyclerView
 
-    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
-    public fun onUpdateCartEvent(event: UpdateCartEvent)
-    {
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public fun onUpdateCartEvent(event: UpdateCartEvent) {
         countCartFromFirebase()
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Retrieve the theme from shared preferences
@@ -87,7 +82,6 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
         loadProductFromFirebase()
         countCartFromFirebase()
 
-
         scaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
         gestureDetector = GestureDetector(this, GestureListener())
     }
@@ -96,7 +90,6 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
         scaleGestureDetector.onTouchEvent(event)
         gestureDetector.onTouchEvent(event)
         return true
-
     }
 
     private fun countCartFromFirebase() {
@@ -179,7 +172,7 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
                 }
 
                 R.id.navigation_profile -> {
-                    val intent = Intent(this,viewprofile::class.java)
+                    val intent = Intent(this, viewprofile::class.java)
                     startActivity(intent)
                     true
                 }
@@ -189,31 +182,13 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
     }
 
     override fun onProductLoadSuccess(productModelList: List<ProductModel>?) {
-
         val adapter = MyProductAdapter(this, productModelList!!, cartInterface)
         recyclerProduct.adapter = adapter
-
     }
 
     override fun onProductLoadFailed(message: String?) {
         val mainLayout: ConstraintLayout = findViewById(R.id.activity_home)
         Snackbar.make(mainLayout, message!!, Snackbar.LENGTH_LONG).show()
-    }
-
-    override fun onCartLoadSuccess(cartModelList: List<CartModel>?) {
-        var cartSum = 0.0
-        for (cartModel in cartModelList!!)
-            cartSum += cartModel.quantity.toDouble()
-    }
-
-    override fun onCartLoadFailed(message: String?) {
-        val mainLayout: ConstraintLayout = findViewById(R.id.activity_home)
-        Snackbar.make(mainLayout, message!!, Snackbar.LENGTH_LONG).show()
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public fun onUpdateCartEvent(event: UpdateCartEvent) {
-        countCartFromFirebase()
     }
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
