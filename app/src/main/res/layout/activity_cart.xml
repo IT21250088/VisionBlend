@@ -28,7 +28,7 @@
             android:layout_gravity="center"
             android:paddingTop="5dp"
             android:text="CART"
-            android:textColor="#41980B"
+            android:textColor="#050505"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
         android:layout_width="211dp"
         android:layout_height="58dp"
         android:layout_marginBottom="28dp"
-        android:backgroundTint="#41980B"
+        android:backgroundTint="#29AE04"
         android:text="Check Out"
         android:textColor="#FFFEFE"
         android:textSize="24sp"

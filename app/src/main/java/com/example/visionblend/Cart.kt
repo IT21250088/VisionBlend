@@ -1,9 +1,7 @@
 package com.example.visionblend
 
 import android.annotation.SuppressLint
-
 import android.os.Bundle
-
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +24,12 @@ class Cart : AppCompatActivity(), ICartLoadInterface {
     private lateinit var txtTotal: TextView
     private var cartModelList: MutableList<CartModel> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Retrieve the theme from shared preferences
+        val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
+        val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
+        // Set the theme
+        setTheme(themeId)
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_cart)

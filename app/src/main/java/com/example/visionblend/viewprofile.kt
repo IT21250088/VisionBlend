@@ -34,6 +34,12 @@ class viewprofile : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Retrieve the theme from shared preferences
+        val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
+        val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
+        // Set the theme
+        setTheme(themeId)
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_viewprofile)
@@ -203,7 +209,7 @@ class viewprofile : AppCompatActivity() {
             startActivity(Intent.createChooser(emailIntent, "Choose an Email client:"))
         }
     }
-//
+    //
     private fun generateReport() {
         // Get current user
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -225,18 +231,18 @@ class viewprofile : AppCompatActivity() {
                         val report =
                             "Vision Blend Report," +
                                     "-----------------------------," +
-                                            "Date: ${SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())}," +
+                                    "Date: ${SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())}," +
                                     "Time: ${SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())}," +
 
-                                            "Name: $name," +
-                                            "Email: $email," +
-                                            "         ,"+
-                                            "Buying Items: $buyingItems ," +
-                                            "Total: 9 items,"
-                                            "Total payment : Rs 4500/-"+
+                                    "Name: $name," +
+                                    "Email: $email," +
+                                    "         ,"+
+                                    "Buying Items: $buyingItems ," +
+                                    "Total: 9 items,"
+                        "Total payment : Rs 4500/-"+
 
-                        // Save report to a file
-                        saveReportToFile(report)
+                                // Save report to a file
+                                saveReportToFile(report)
                     }
                 }
 

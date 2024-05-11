@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
             R.style.Theme_VisionBlend_Monochromatism -> btnLogin.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorMono)
             R.style.Theme_VisionBlend_Tritanopia -> btnLogin.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorTritan)
             R.style.Theme_VisionBlend_Deuteranopia -> btnLogin.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorDeuteran)
-            // Add more cases if you have more themes
+
         }
 
         tvRedirectSignUp.setOnClickListener {
