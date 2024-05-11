@@ -203,7 +203,7 @@ class viewprofile : AppCompatActivity() {
             startActivity(Intent.createChooser(emailIntent, "Choose an Email client:"))
         }
     }
-
+//
     private fun generateReport() {
         // Get current user
         val currentUser = FirebaseAuth.getInstance().currentUser

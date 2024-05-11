@@ -50,7 +50,7 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
             startActivity(intent)
         }
 
-
+//t
         // Initialize the mic button
         mic.setOnClickListener {
             startVoiceRecognition()
