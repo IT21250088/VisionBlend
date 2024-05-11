@@ -24,5 +24,10 @@
     <string name="don_t_have_an_account">don\'t have an account sign in</string>
     <string name="forgotpassword">Forgot password</string>
     <string name="signup">Signup</string>
+    <string name="notifications">Notifications</string>
+    <string name="name_of_the_prodduct">Name of the prodduct</string>
+    <string name="name_of_the_product">name of the product</string>
+    <string name="rs">Rs :</string>
+    <string name="item_image" />
 
 </resources>

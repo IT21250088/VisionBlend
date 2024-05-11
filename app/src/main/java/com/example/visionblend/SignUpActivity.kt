@@ -1,13 +1,12 @@
 package com.example.visionblend
 
-import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -28,7 +27,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
-    // Retrieve the theme from the shared preferences
+        // Retrieve the theme from the shared preferences
         val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
         val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
         // Set the theme
@@ -42,7 +41,9 @@ class SignUpActivity : AppCompatActivity() {
         etConfPass = findViewById(R.id.etSConfPassword)
         etPass = findViewById(R.id.etSPassword)
         btnSignUp = findViewById(R.id.btnSSigned)
+
            //tvRedirectLogin = findViewById(R.id.tvRedirectLogin)
+
         etName = findViewById(R.id.etSUsername)
 
         // Initialize auth object
@@ -50,6 +51,15 @@ class SignUpActivity : AppCompatActivity() {
 
         // Initialize database object
         database = FirebaseDatabase.getInstance().reference
+
+        // Set the button color based on the current theme
+        when (themeId) {
+            R.style.Theme_VisionBlend -> btnSignUp.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorDefault)
+            R.style.Theme_VisionBlend_Monochromatism -> btnSignUp.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorMono)
+            R.style.Theme_VisionBlend_Tritanopia -> btnSignUp.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorTritan)
+            R.style.Theme_VisionBlend_Deuteranopia -> btnSignUp.backgroundTintList = ContextCompat.getColorStateList(this, R.color.buttonColorDeuteran)
+            // Add more cases if you have more themes
+        }
 
         btnSignUp.setOnClickListener {
             signUpUser()

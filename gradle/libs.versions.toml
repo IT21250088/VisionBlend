@@ -17,6 +17,7 @@ firebaseAuth = "22.3.1"
 
 firebaseFirestore = "24.11.0"
 firebaseAuthKtx = "22.3.1"
+material3Android = "1.2.1"
 
 
 [libraries]
@@ -36,6 +37,7 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version
 
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 
 
 [plugins]
