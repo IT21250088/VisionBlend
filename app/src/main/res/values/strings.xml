@@ -28,5 +28,6 @@
     <string name="name_of_the_prodduct">Name of the prodduct</string>
     <string name="name_of_the_product">name of the product</string>
     <string name="rs">Rs :</string>
+    <string name="item_image" />
 
 </resources>

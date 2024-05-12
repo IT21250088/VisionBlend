@@ -1,9 +1,14 @@
 package com.example.visionblend
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.speech.tts.TextToSpeech
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -20,7 +25,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.Locale
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class viewprofile : AppCompatActivity() {
 
@@ -33,6 +43,12 @@ class viewprofile : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Retrieve the theme from shared preferences
+        val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
+        val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
+        // Set the theme
+        setTheme(themeId)
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_viewprofile)
@@ -91,6 +107,10 @@ class viewprofile : AppCompatActivity() {
         val emailButton = findViewById<Button>(R.id.emailbutton)
         emailButton.setOnClickListener {
             sendEmail()
+        }
+        val reportButton = findViewById<Button>(R.id.reportButton)
+        reportButton.setOnClickListener {
+            generateReport()
         }
 
     }
@@ -305,6 +325,89 @@ class viewprofile : AppCompatActivity() {
         } else {
             // Show a chooser to select an email client
             startActivity(Intent.createChooser(emailIntent, "Choose an Email client:"))
+        }
+    }
+    //
+    private fun generateReport() {
+        // Get current user
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        // Reference to the user's data in Firebase
+        currentUser?.uid?.let { uid ->
+            val userRef = FirebaseDatabase.getInstance().getReference("users/$uid")
+
+            userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // Check if the user data exists
+                    if (dataSnapshot.exists()) {
+                        // Extract user details
+                        val name = dataSnapshot.child("name").getValue(String::class.java) ?: "N/A"
+                        val email = dataSnapshot.child("email").getValue(String::class.java) ?: "N/A"
+                        val buyingItems = dataSnapshot.child("buyingItems").getValue(String::class.java) ?: "Apple 2, Banana 3, Orange 4"
+
+                        // Create a CSV report string
+                        val report =
+                            "Vision Blend Report," +
+                                    "-----------------------------," +
+                                    "Date: ${SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())}," +
+                                    "Time: ${SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())}," +
+
+                                    "Name: $name," +
+                                    "Email: $email," +
+                                    "         ,"+
+                                    "Buying Items: $buyingItems ," +
+                                    "Total: 9 items,"
+                        "Total payment : Rs 4500/-"+
+
+                                // Save report to a file
+                                saveReportToFile(report)
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle possible errors
+                }
+            })
+        }
+    }
+
+    private fun saveReportToFile(report: String) {
+        val filename = "report.pdf"
+        val resolver = contentResolver
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+            put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf")
+            put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+        }
+
+        val uri: Uri? = resolver.insert(MediaStore.Files.getContentUri("external"), contentValues)
+
+        uri?.let {
+            resolver.openOutputStream(it)?.use { outputStream ->
+                // Convert the report string to PDF format and write to the outputStream
+                val pdfDocument = PdfDocument()
+                val pageInfo = PdfDocument.PageInfo.Builder(595, 842, 1).create()
+                val page = pdfDocument.startPage(pageInfo)
+                val canvas = page.canvas
+                val paint = Paint()
+                paint.textSize = 20f
+
+                // Split the report by comma and draw each item on a new line
+                val items = report.split(",")
+                var y = 50f
+                for (item in items) {
+                    canvas.drawText(item, 10f, y, paint)
+                    y += paint.descent() - paint.ascent() + 10f
+                }
+
+                pdfDocument.finishPage(page)
+                pdfDocument.writeTo(outputStream)
+                pdfDocument.close()
+
+                showToast("Report downloaded successfully")
+            }
+        } ?: run {
+            showToast("Failed to download report")
         }
     }
 

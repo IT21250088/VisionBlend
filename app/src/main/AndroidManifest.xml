@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -22,6 +25,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
+
         <activity
             android:name=".Category"
             android:exported="true">
@@ -39,7 +43,28 @@
         <activity
             android:name=".SignUpActivity"
             android:exported="true" />
+        <activity
+            android:name=".FruitsAndVegetables"
+            android:exported="true"/>
+        <activity
+            android:name=".DiaryProducts"
+            android:exported="true"/>
+        <activity
+            android:name=".MeatAndFish"
+            android:exported="true"/>
+        <activity
+            android:name=".CareProducts"
+            android:exported="true"/>
+        <activity
+            android:name=".Item"
+            android:exported="true"/>
 
+        <activity
+            android:name=".Snacks"
+            android:exported="true"/>
+        <activity
+            android:name=".Beverages"
+            android:exported="true" />
         <activity
             android:name=".viewprofile"
             android:exported="true" />

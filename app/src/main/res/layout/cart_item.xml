@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:text="Name :"
-                android:textColor="#297E0B"
+                android:textColor="#000000"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -104,7 +104,7 @@
                 android:layout_marginEnd="118dp"
                 android:layout_marginBottom="72dp"
                 android:text="Price"
-                android:textColor="#297E0B"
+                android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

@@ -54,6 +54,11 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         // Set OnClickListener to the button
         otherButton.setOnClickListener {
+            // Stop the TextToSpeech
+            if (tts.isSpeaking) {
+                tts.stop()
+            }
+
             // Create an Intent to navigate to the login activity
             val intent = Intent(this, LoginActivity::class.java)
 
@@ -61,7 +66,7 @@ class Category : AppCompatActivity(), TextToSpeech.OnInitListener {
             startActivity(intent)
         }
 
-
+//t
         // Initialize the mic button
         mic.setOnClickListener {
             startVoiceRecognition()

@@ -27,9 +27,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-
-
-class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
+class Home : AppCompatActivity(), ProductLoadInterface, ICartLoadInterface {
 
     private lateinit var productLoadInterface: ProductLoadInterface
     private lateinit var cartInterface: ICartLoadInterface
@@ -49,7 +47,31 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
         EventBus.getDefault().unregister(this)
     }
 
+    override fun onCartLoadSuccess(cartModelList: List<CartModel>?) {
+        var cartSum = 0.0
+        for (cartModel in cartModelList!!)
+            cartSum += cartModel.quantity.toDouble()
+    }
+
+    override fun onCartLoadFailed(message: String?) {
+        val mainLayout: ConstraintLayout = findViewById(R.id.activity_home)
+        Snackbar.make(mainLayout, message!!, Snackbar.LENGTH_LONG).show()
+    }
+
+    lateinit var recycler_product: RecyclerView
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public fun onUpdateCartEvent(event: UpdateCartEvent) {
+        countCartFromFirebase()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Retrieve the theme from shared preferences
+        val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
+        val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
+        // Set the theme
+        setTheme(themeId)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         init()
@@ -159,6 +181,7 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
         Snackbar.make(mainLayout, message!!, Snackbar.LENGTH_LONG).show()
     }
 
+
     override fun onCartLoadSuccess(cartModelList: List<CartModel>?) {
         var cartSum = 0.0
         for (cartModel in cartModelList!!)
@@ -174,10 +197,6 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
     public fun onUpdateCartEvent(event: UpdateCartEvent) {
         countCartFromFirebase()
     }
-
-
-
-
 
 
 }

@@ -18,10 +18,10 @@
 
     <!-- Tritanopia theme colors -->
     <color name="colorPrimaryTritan">#6A6003</color>
-    <color name="colorPrimaryDarkTritan">#00574B</color>
+    <color name="colorPrimaryDarkTritan">#5E5102</color>
     <color name="colorAccentTritan">#4CAF50</color>
     <color name="tritanTextColor">#000000</color>
-    <color name="buttonColorTritan">#00796B</color>
+    <color name="buttonColorTritan">#6A6003</color>
     <color name="backgroundColorTritan">#F6EB84</color>
 
     <!-- Deuteranopia and Protanopia theme colors -->
