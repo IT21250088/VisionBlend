@@ -2,8 +2,8 @@
     <!-- Default Theme -->
     <style name="Theme.VisionBlend" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">#38B11E</item>
+        <item name="colorPrimaryDark">#38B11E</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/defaultTextColor</item>
         <item name="android:buttonStyle">@style/ButtonStyle</item>
@@ -26,7 +26,7 @@
         <item name="android:buttonStyle">@style/ButtonStyleMono</item>
         <item name="buttonColor">@color/buttonColorMono</item>
         <item name="backgroundColor">@color/backgroundColorMono</item>
-        <item name="android:windowBackground">@color/backgroundColorMono</item>
+        <item name="android:windowBackground">@color/backgroundColorDefault</item>
 
     </style>
 
@@ -39,13 +39,13 @@
     <!-- Theme for Tritanopia -->
     <style name="Theme.VisionBlend.Tritanopia" parent="Theme.VisionBlend">
         <item name="colorPrimary">@color/colorPrimaryTritan</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkTritan</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryTritan</item>
         <item name="colorAccent">@color/colorAccentTritan</item>
         <item name="android:textColor">@color/tritanTextColor</item>
         <item name="android:buttonStyle">@style/ButtonStyleTritan</item>
-        <item name="buttonColor">@color/buttonColorTritan</item>
+        <item name="buttonColor">@color/colorPrimaryTritan</item>
         <item name="backgroundColor">@color/backgroundColorTritan</item>
-        <item name="android:windowBackground">@color/backgroundColorTritan</item>
+        <item name="android:windowBackground">@color/backgroundColorDefault</item>
     </style>
 
     <!-- Button style for Tritanopia -->
@@ -62,7 +62,7 @@
         <item name="android:textColor">@color/deuteranTextColor</item>
         <item name="android:buttonStyle">@style/ButtonStyleDeuteran</item>
         <item name="buttonColor">@color/buttonColorDeuteran</item>
-        <item name="android:windowBackground">@color/backgroundColorDeuteran</item>
+        <item name="android:windowBackground">@color/backgroundColorDefault</item>
     </style>
 
     <!-- Button style for Deuteranopia and Protanopia -->

@@ -1,6 +1,6 @@
 package com.example.visionblend
 
-import Adapter.GroceryAdapter
+import com.example.visionblend.Adapter.GroceryAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
