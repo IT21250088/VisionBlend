@@ -1,10 +1,11 @@
 package com.example.visionblend
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.GestureDetector
-import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,16 +19,13 @@ import com.example.visionblend.Model.ProductModel
 import com.example.visionblend.utils.SpacesItemDecoration
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import android.view.MotionEvent
-import android.view.ScaleGestureDetector
-import androidx.core.view.GestureDetectorCompat
 
 
 
@@ -36,10 +34,8 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
     private lateinit var productLoadInterface: ProductLoadInterface
     private lateinit var cartInterface: ICartLoadInterface
     private lateinit var recyclerProduct: RecyclerView
-    private lateinit var scaleGestureDetector: ScaleGestureDetector
-    private lateinit var gestureDetector: GestureDetector
 
-    private var scaleFactor = 1.0f
+
 
     override fun onStart() {
         super.onStart()
@@ -60,15 +56,9 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
         loadProductFromFirebase()
         countCartFromFirebase()
 
-        scaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
-        gestureDetector = GestureDetector(this, GestureListener())
+
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        scaleGestureDetector.onTouchEvent(event)
-        gestureDetector.onTouchEvent(event)
-        return true
-    }
 
     private fun countCartFromFirebase() {
         val cartModels: MutableList<CartModel> = ArrayList()
@@ -150,7 +140,7 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
                 }
 
                 R.id.navigation_profile -> {
-                    val intent = Intent(this,viewprofile::class.java)
+                    val intent = Intent(this, viewprofile::class.java)
                     startActivity(intent)
                     true
                 }
@@ -185,35 +175,10 @@ class Home : AppCompatActivity(), ProductLoadInterface,ICartLoadInterface{
         countCartFromFirebase()
     }
 
-    private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
-        override fun onScroll(
-            e1: MotionEvent?,
-            e2: MotionEvent,
-            distanceX: Float,
-            distanceY: Float
-        ): Boolean {
-            // Handle scroll events
-            return true
-        }
 
-        override fun onDoubleTap(e: MotionEvent): Boolean {
-            // Handle double tap events
-            return true
-        }
-    }
 
-    private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
-        override fun onScale(detector: ScaleGestureDetector): Boolean {
-            scaleFactor *= detector.scaleFactor
-            scaleFactor = Math.max(1.0f, Math.min(scaleFactor, 1.5f)) // Clamp scale factor
 
-            // Apply scale factor to your views
-            recyclerProduct.scaleX = scaleFactor
-            recyclerProduct.scaleY = scaleFactor
 
-            return true
-        }
-    }
 
 }
 

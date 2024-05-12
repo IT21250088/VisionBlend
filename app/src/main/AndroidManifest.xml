@@ -20,9 +20,6 @@
             android:name=".Cart"
             android:exported="false" />
         <activity
-            android:name=".Checkout"
-            android:exported="false" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
