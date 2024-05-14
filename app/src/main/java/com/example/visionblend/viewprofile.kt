@@ -10,11 +10,16 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.speech.tts.TextToSpeech
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.GestureDetectorCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -31,15 +36,32 @@ class viewprofile : AppCompatActivity() {
 
     private lateinit var showname: TextView
     private lateinit var showemail: TextView
+    private lateinit var mScaleGestureDetector: ScaleGestureDetector
+    private lateinit var mGestureDetector: GestureDetectorCompat
+
+    private var mScaleFactor = 0.5f
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Retrieve the theme from shared preferences
+        val sharedPref = getSharedPreferences("ThemePref", MODE_PRIVATE)
+        val themeId = sharedPref.getInt("themeId", R.style.Theme_VisionBlend)
+        // Set the theme
+        setTheme(themeId)
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_viewprofile)
 
         showname = findViewById(R.id.showname)
         showemail = findViewById(R.id.showemail)
+
+        // Create a ScaleGestureDetector
+        mScaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
+
+
+        // Create a GestureDetector
+        mGestureDetector = GestureDetectorCompat(this, GestureListener())
 
         // Get current user
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -91,6 +113,108 @@ class viewprofile : AppCompatActivity() {
             generateReport()
         }
 
+    }
+
+
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        // Let the ScaleGestureDetector inspect all events
+        mScaleGestureDetector.onTouchEvent(event)
+
+        // Let the GestureDetector inspect all events
+        mGestureDetector.onTouchEvent(event)
+
+        return true
+    }
+
+    private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+        override fun onScroll(
+            e1: MotionEvent?,
+            e2: MotionEvent,
+            distanceX: Float,
+            distanceY: Float
+        ): Boolean {
+            // Only allow movement if the view is magnified
+            if (mScaleFactor > 1.0f) {
+                // Get the ConstraintLayout
+                val constraintLayout = findViewById<ConstraintLayout>(R.id.activity_viewprofile)
+
+                // Iterate over all child views of the ConstraintLayout
+                for (i in 0 until constraintLayout.childCount) {
+                    val child = constraintLayout.getChildAt(i)
+
+                    // Calculate the new translations
+                    val newTranslationX = child.translationX - distanceX
+                    val newTranslationY = child.translationY - distanceY
+
+
+                    // Limit the translations to certain bounds
+                    val maxTranslation = 200.0f // Change this value to set the maximum allowed movement
+                    child.translationX = Math.max(-maxTranslation, Math.min(newTranslationX, maxTranslation))
+                    child.translationY = Math.max(-maxTranslation, Math.min(newTranslationY, maxTranslation))
+                }
+            }
+
+            return true
+        }
+
+        override fun onDoubleTap(e: MotionEvent): Boolean {
+            // Toggle between actual size and magnified size
+            mScaleFactor = if (mScaleFactor > 1.0f) {
+                // Get the ConstraintLayout
+                val constraintLayout = findViewById<ConstraintLayout>(R.id.activity_viewprofile)
+
+                // Iterate over all child views of the ConstraintLayout
+                for (i in 0 until constraintLayout.childCount) {
+                    val child = constraintLayout.getChildAt(i)
+
+                    // Reset the translations of the child view
+                    child.translationX = 0f
+                    child.translationY = 0f
+                }
+
+                1.0f
+            } else {
+                1.5f // Change this value to control the magnification level
+            }
+
+            // Get the ConstraintLayout
+            val constraintLayout = findViewById<ConstraintLayout>(R.id.activity_viewprofile)
+
+            // Iterate over all child views of the ConstraintLayout
+            for (i in 0 until constraintLayout.childCount) {
+                val child = constraintLayout.getChildAt(i)
+
+                // Apply the scaling to the child view
+                child.scaleX = mScaleFactor
+                child.scaleY = mScaleFactor
+            }
+
+            return true
+        }
+    }
+
+
+
+    private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        override fun onScale(scaleGestureDetector: ScaleGestureDetector): Boolean {
+            mScaleFactor *= scaleGestureDetector.scaleFactor
+            mScaleFactor = Math.max(1.0f, Math.min(mScaleFactor, 1.5f)) // Set the minimum scale factor to 1.0f
+
+            // Get the ConstraintLayout
+            val constraintLayout = findViewById<ConstraintLayout>(R.id.activity_viewprofile)
+
+            // Iterate over all child views of the ConstraintLayout
+            for (i in 0 until constraintLayout.childCount) {
+                val child = constraintLayout.getChildAt(i)
+
+                // Apply the scaling to the child view
+                child.scaleX = mScaleFactor
+                child.scaleY = mScaleFactor
+            }
+
+            return true
+        }
     }
 
     private lateinit var tts: TextToSpeech
@@ -203,7 +327,7 @@ class viewprofile : AppCompatActivity() {
             startActivity(Intent.createChooser(emailIntent, "Choose an Email client:"))
         }
     }
-//
+    //
     private fun generateReport() {
         // Get current user
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -225,18 +349,18 @@ class viewprofile : AppCompatActivity() {
                         val report =
                             "Vision Blend Report," +
                                     "-----------------------------," +
-                                            "Date: ${SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())}," +
+                                    "Date: ${SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())}," +
                                     "Time: ${SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())}," +
 
-                                            "Name: $name," +
-                                            "Email: $email," +
-                                            "         ,"+
-                                            "Buying Items: $buyingItems ," +
-                                            "Total: 9 items,"
-                                            "Total payment : Rs 4500/-"+
+                                    "Name: $name," +
+                                    "Email: $email," +
+                                    "         ,"+
+                                    "Buying Items: $buyingItems ," +
+                                    "Total: 9 items,"
+                        "Total payment : Rs 4500/-"+
 
-                        // Save report to a file
-                        saveReportToFile(report)
+                                // Save report to a file
+                                saveReportToFile(report)
                     }
                 }
 

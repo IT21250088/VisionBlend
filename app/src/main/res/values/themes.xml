@@ -40,7 +40,7 @@
     <style name="Theme.VisionBlend.Tritanopia" parent="Theme.VisionBlend">
         <item name="colorPrimary">@color/colorPrimaryTritan</item>
         <item name="colorPrimaryDark">@color/colorPrimaryTritan</item>
-        <item name="colorAccent">@color/colorAccentTritan</item>
+        <item name="colorAccent">@color/colorPrimaryTritan</item>
         <item name="android:textColor">@color/tritanTextColor</item>
         <item name="android:buttonStyle">@style/ButtonStyleTritan</item>
         <item name="buttonColor">@color/colorPrimaryTritan</item>
